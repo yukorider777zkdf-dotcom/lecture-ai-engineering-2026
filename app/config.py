@@ -1,9 +1,15 @@
 """講座全体で共通の設定。
 
 APIキーやモデル名はコードに書かず、環境変数から読み込む。
+ローカルでは、リポジトリ直下の .env も読み込める。
 """
 
 import os
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).resolve().parent.parent / ".env", override=False)
 
 # 既定モデル。環境変数 AIE_MODEL を設定すると切り替えられる。
 #   例: export AIE_MODEL=gemini-3.5-flash
@@ -27,10 +33,8 @@ def get_api_key() -> str:
     key = os.getenv("GEMINI_API_KEY")
     if not key:
         raise SystemExit(
-            "環境変数 GEMINI_API_KEY が見つかりません。\n"
-            "1. GitHub の Settings → Codespaces → Secrets に GEMINI_API_KEY を登録し、\n"
-            "   使う repository に自分の fork を選んでください。\n"
-            "2. Codespaces を起動したあとに登録した場合は、Codespaces を再起動してください。\n"
-            "   （左下の「Codespaces」→「Stop Current Codespace」→ 再度開く）"
+            "GEMINI_API_KEY が見つかりません。\n"
+            "ローカルではリポジトリ直下の .env に GEMINI_API_KEY=あなたのキー を保存してください。\n"
+            "Codespaces では GitHub の Codespaces secret に GEMINI_API_KEY を登録してください。"
         )
     return key
