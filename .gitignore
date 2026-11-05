@@ -12,3 +12,7 @@ learning_log/
 
 # macOS
 .DS_Store
+
+slides/
+various/
+.vscode/
