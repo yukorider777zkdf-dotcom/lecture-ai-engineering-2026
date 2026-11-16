@@ -24,5 +24,15 @@
         "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python"
       }
     }
-  }
+  },
+  "runArgs": [
+  "--cap-add=SYS_ADMIN",
+  "--cap-add=SYS_CHROOT",
+  "--cap-add=SETUID",
+  "--cap-add=SETGID",
+  "--cap-add=SYS_PTRACE",
+  "--security-opt=seccomp=unconfined",
+  "--security-opt=apparmor=unconfined",
+  "--security-opt=systempaths=unconfined"
+]
 }
